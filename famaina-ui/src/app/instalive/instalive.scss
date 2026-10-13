@@ -1,0 +1,102 @@
+:host {
+  display: block;
+}
+
+.camera-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.camera-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  text-align: center;
+}
+
+.exit-button {
+  color: white;
+}
+
+.right-click-area {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: transparent;
+}
+
+.top-right {
+  display: flex;
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 2;
+  gap: 6px;
+}
+
+.top-left {
+  display: flex;
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: max(16px, env(safe-area-inset-left));
+  z-index: 2;
+}
+
+.profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  background-image: url('https://picsum.photos/64');
+  background-size: cover;
+  background-position: center;
+}
+
+.live {
+  background: radial-gradient(
+    circle at 30% 20%,
+    #e1306c 40%,
+    #c13584 70%,
+    #833ab4 100%
+  );
+}
+.viewers {
+  background: rgba(60, 60, 60, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  gap:3px
+}
+
+.bubble {
+  user-select: none;
+  -webkit-user-select: none;
+  display: inline-flex;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+}

@@ -1,0 +1,23 @@
+<div class="menu-container">
+    <h1>Famaina</h1>
+    <h2>{{ 'greeting' | translate }}</h2>
+  
+    <form #form="ngForm" class="menu-form" autocomplete="off">
+      <mat-form-field>
+        <mat-label>{{ 'labels.username' | translate }}</mat-label>
+        <input matInput name="username" ngModel required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'labels.platform' | translate}}</mat-label>
+        <select matNativeControl name="platform" ngModel required>
+          <option value="insta">Instagram</option>
+          <option value="tiktok">TikTok</option>
+          <option value="youtube">Youtube</option>
+        </select>
+      </mat-form-field>
+  
+      <button matButton="elevated" type="button" (click)="golive(form.value)" [disabled]="form.invalid">
+        {{ 'buttons.golive' | translate }}
+      </button>
+    </form>
+  </div>
