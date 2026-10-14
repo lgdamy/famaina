@@ -1,0 +1,6 @@
+<video #video class="camera-video" autoplay muted playsinline></video>
+@if(debugCamera()) {
+    <pre class="camera-debug">{{ debugCamera() }}</pre>
+}
+<div class="resolution up" (click)="resolution('up')"></div>
+<div class="resolution down" (click)="resolution('down')"></div>

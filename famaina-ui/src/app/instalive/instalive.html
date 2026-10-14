@@ -1,13 +1,5 @@
-<div #cameraContainer class="camera-container">
-  <video
-    #video
-    class="camera-video"
-    autoplay
-    muted
-    playsinline>
-  </video>
-
-  @if(cameraAtiva()) {
+<div class="insta-container">
+  <app-livecam></app-livecam>
     <div class="right-click-area" (click)="incrementViewCount()"></div>
     <div class="top-left">
         <div class="profile-pic"></div>
@@ -16,7 +8,6 @@
     <div class="top-right">
         <div class="live bubble">{{'buttons.live' | translate}}</div>
         <div class="viewers bubble"><mat-icon>visibility</mat-icon>{{compactNumber.format(viewCount())}}</div>
-        <button matIconButton type="button" class="exit-button" [routerLink]="''"><mat-icon>close</mat-icon></button>
+        <button matIconButton type="button" class="exit-button" (click)="encerrar()"><mat-icon>close</mat-icon></button>
     </div>
-  }
 </div>
