@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
       lang: 'pt',
       fallbackLang: 'pt',
       loader: provideTranslateHttpLoader({
-        prefix: '.i18n/',
+        prefix: 'i18n/',
         suffix: '.json',
       })
     })
