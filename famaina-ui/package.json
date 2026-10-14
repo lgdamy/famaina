@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "ghpages": "ng build --base-href=/famaina/ --configuration=production && cp -r dist/famaina-ui/browser/. ../docs"
+    "ghpages": "ng build --base-href=/ --configuration=production && cp -r dist/famaina-ui/browser/. ../docs"
   },
   "private": true,
   "packageManager": "npm@10.9.9",
