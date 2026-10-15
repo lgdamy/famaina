@@ -25,12 +25,8 @@ interface EmojiLike {
 export class Instalive {
   private readonly router = inject(Router);
   private readonly configurations = inject(Configurations);
-  private readonly emojis = ['❤️', '😍', '🥰', '😂', '🔥','👏', '💖', '💕', '👍', '✨'];
   
-  private nextLikeId = 0;
-  private likeFrenzyOdd = 0;
-  private likeFrenzyArray = [0,0.075,0.15,0.3,0.6];
-
+  
   readonly compactNumber = new Intl.NumberFormat('en-US', {
     notation: 'compact',
     maximumFractionDigits: 1
@@ -39,9 +35,13 @@ export class Instalive {
   readonly username: string = this.configurations.username;
   readonly viewCount = signal(100);
   
+  private nextLikeId = 0;
+  private likeFrenzyOdd = 0;
+  private likeFrenzyArray = [0,0.08,0.16,0.32,0.64];
+  
   ngOnInit(): void {
     timer(0,2000).subscribe(() => this.viewCount.update(count => count+= Math.round(Math.random() * 10)))
-    timer(0,350).subscribe(() => {
+    timer(0,300).subscribe(() => {
       if (Math.random() < this.likeFrenzyOdd) {
         this.dispatchLike();
       }
@@ -62,10 +62,11 @@ export class Instalive {
   }
 
   dispatchLike() {
+    const emojis = ['❤️','😍','🥰','😂','🔥','👏','💖','💔','💕','👍','🙏','🤭','😱','😎','💩'];
     const id = ++this.nextLikeId;
     const like: EmojiLike = {
       id,
-      emoji: this.emojis[Math.floor(Math.random() * this.emojis.length)],
+      emoji: emojis[Math.floor(Math.random() * emojis.length)],
       left: 5 + Math.random() * 85,
       size: 20 + Math.random() * 20,
       duration: 2.5 + Math.random() * 2,
