@@ -1,6 +1,7 @@
 <div class="insta-container">
   <app-livecam></app-livecam>
-    <div class="right-click-area" (click)="incrementViewCount()"></div>
+    <div class="right-action up" (click)="incrementViewCount()"></div>
+    <div class="right-action down" (click)="dispatchLike()"></div>
     <div class="top-left">
         <div class="profile-pic"></div>
         <div class="bubble">{{username}}</div>
@@ -10,4 +11,11 @@
         <div class="viewers bubble"><mat-icon>visibility</mat-icon>{{compactNumber.format(viewCount())}}</div>
         <button matIconButton type="button" class="exit-button" (click)="encerrar()"><mat-icon>close</mat-icon></button>
     </div>
+    <div class="likes-container">
+        @for (like of likes(); track like.id) {
+          <span class="floating-like" [style.left.%]="like.left" [style.font-size.px]="like.size" [style.--duration]="like.duration + 's'" [style.--drift]="like.drift + 'px'">
+            {{ like.emoji }}
+          </span>
+        }
+      </div>
 </div>
