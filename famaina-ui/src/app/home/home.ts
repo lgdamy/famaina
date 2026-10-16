@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Configurations } from '../configurations';
 import { MatSelectModule } from '@angular/material/select';
+import { Tracking } from '../tracking';
 
 @Component({
   imports: [TranslatePipe, MatButton, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule],
@@ -17,9 +18,11 @@ import { MatSelectModule } from '@angular/material/select';
 export class Home {
   private readonly router = inject(Router);
   private readonly configurations = inject(Configurations);
+  private readonly tracking = inject(Tracking);
 
   golive(form: {username: string, platform: string}) {
       this.configurations.username = form.username;
+      this.tracking.track('golive_pushed',{'platform': form.platform})
       this.router.navigate([`/${form.platform}`])
   }
 }
