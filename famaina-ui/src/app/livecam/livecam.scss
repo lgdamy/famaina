@@ -23,6 +23,22 @@
     }
 }
 
+.right-action {
+  -webkit-user-select: none;
+  user-select: none;
+  position: fixed;
+  right: 0;
+  width: 33%;
+  height: 50%;
+  background: transparent;
+  &.up{
+    top: 0;
+  }
+  &.down {
+    bottom: 0;
+  }
+}
+
 .camera-debug {
     position: absolute;
     left: 8px;

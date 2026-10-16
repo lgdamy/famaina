@@ -6,6 +6,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Configurations } from '../configurations';
 import { timer } from 'rxjs';
 import { Livecam } from '../livecam/livecam';
+import { Tracking } from '../tracking';
 
 interface EmojiLike {
   id: number;
@@ -25,6 +26,7 @@ interface EmojiLike {
 export class Instalive {
   private readonly router = inject(Router);
   private readonly configurations = inject(Configurations);
+  private readonly tracking = inject(Tracking);
   
   
   readonly compactNumber = new Intl.NumberFormat('en-US', {
@@ -36,29 +38,19 @@ export class Instalive {
   readonly viewCount = signal(100);
   
   private nextLikeId = 0;
-  private likeFrenzyOdd = 0;
-  private likeFrenzyArray = [0,0.08,0.16,0.32,0.64];
   
   ngOnInit(): void {
-    timer(0,2000).subscribe(() => this.viewCount.update(count => count+= Math.round(Math.random() * 10)))
-    timer(0,300).subscribe(() => {
-      if (Math.random() < this.likeFrenzyOdd) {
-        this.dispatchLike();
-      }
-    })
+    timer(0,2000).subscribe(() => this.viewCount.update(count => count+= Math.round(Math.random() * 10)));
+    this.tracking.track('live_started', {'platform':'insta'});
   }
 
   encerrar() {
+    this.tracking.track('live_ended', {'platform':'insta'});
     this.router.navigate(['']);
   }
 
-  incrementViewCount() {
-    this.viewCount.update((count => count+= Math.round(Math.random() * 50)));
-  }
-
-  likeFrenzy() {
-    this.likeFrenzyArray.push(this.likeFrenzyArray.shift()!);
-    this.likeFrenzyOdd = this.likeFrenzyArray[0];
+  updateViewCount(value: number) {
+    this.viewCount.update(count => count+=value);
   }
 
   dispatchLike() {
