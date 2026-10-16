@@ -7,6 +7,17 @@
     transform: scaleX(-1);
 }
 
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.info {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .resolution{
     -webkit-user-select: none;
     user-select: none;
@@ -53,4 +64,17 @@
     font-size: 10px;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+}
+.transition-in {
+  animation: fade 200ms;
+}
+
+.transition-out {
+  animation: fade 200ms reverse;
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+
+  to {opacity: 1;}
 }
