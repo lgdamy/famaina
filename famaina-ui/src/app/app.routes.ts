@@ -12,6 +12,14 @@ export const routes: Routes = [
         component: Instalive
     },
     {
+        path: 'tiktok',
+        component: Instalive
+    },
+    {
+        path: 'youtube',
+        component: Instalive
+    },
+    {
         path: '**',
         pathMatch: 'full',
         redirectTo: '/'

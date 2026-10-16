@@ -27,10 +27,11 @@ export class Livecam {
   private readonly destroyRef = inject(DestroyRef);
   private readonly tracking = inject(Tracking);
   debugCamera = signal('');
+  displayResolution = signal('');
   private readonly viewFrenzyStop = signal(false);
 
  
-  private currentResolution: 1|2|3|4 = 4;
+  private currentResolution: 1|2|3|4 = 3;
   private readonly resolutions = {
     1: {height: {ideal: 480}, width: {ideal: 854}},
     2: {height: {ideal: 720}, width: {ideal: 1280}},
@@ -110,6 +111,7 @@ export class Livecam {
     if (methodToBeInvoked) methodToBeInvoked.call(elem);
   }
 
+  private timer?: number;
   async resolution(option: 'up' | 'down') {
     if (this.currentResolution === 4 && option === 'up') return
     if (this.currentResolution === 1 && option === 'down') return
@@ -118,6 +120,11 @@ export class Livecam {
     if (option === 'up') this.currentResolution++;
     if (option === 'down') this.currentResolution--;
     await track.applyConstraints({...this.resolutions[this.currentResolution],...this.constraints});
+    let resolutionNames = {1: '480p', 2: '720p', 3: '1080p', 4:'4K'};
+    this.displayResolution.set(resolutionNames[this.currentResolution]);
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.displayResolution.set(''), 2000);
+
     // this.debugCamera.set(JSON.stringify({
     //   settings: track.getSettings(),
     //   capabilities: track.getCapabilities()
