@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
-import { Instalive } from './instalive/instalive';
 import { Home } from './home/home';
-import { Youtubelive } from './youtubelive/youtubelive';
 
 export const routes: Routes = [
     {
@@ -10,7 +8,7 @@ export const routes: Routes = [
     },
     {
         path: 'insta',
-        component: Instalive
+        loadComponent: () => import('./instalive/instalive').then(m => m.Instalive)
     },
     {
         path: 'tiktok',
@@ -18,7 +16,7 @@ export const routes: Routes = [
     },
     {
         path: 'youtube',
-        component: Youtubelive
+        loadComponent: () => import('./youtubelive/youtubelive').then(m => m.Youtubelive)
     },
     {
         path: '**',
