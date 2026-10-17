@@ -152,13 +152,13 @@ export class Livecam {
   }
 
   private likeFrenzyArray = [0,0.08,0.16,0.32,0.64];
-  private likeFrenzyRepresentations = ['🫢','🫣','☺️','😄','🤣']
+  private liveFrenzyRepresentations = ['🫢','🫣','☺️','😄','🤣']
 
-  likeFrenzy() {
+  liveFrenzy() {
     this.likeFrenzyArray.push(this.likeFrenzyArray.shift()!);
-    this.likeFrenzyRepresentations.push(this.likeFrenzyRepresentations.shift()!);
+    this.liveFrenzyRepresentations.push(this.liveFrenzyRepresentations.shift()!);
     this.tracking.track('like_frenzy', {'frenzy_outcome': this.likeFrenzyArray[0]});
-    this.displayHint.set(this.likeFrenzyRepresentations[0]);
+    this.displayHint.set(this.liveFrenzyRepresentations[0]);
     clearTimeout(this.hintTimer);
     this.hintTimer = setTimeout(() => this.displayHint.set(''), 2000);
   }
