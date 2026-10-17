@@ -2,8 +2,8 @@
 @if(debugCamera()) {
     <pre class="camera-debug">{{ debugCamera() }}</pre>
 }
-@if(displayResolution(); as displayResolution) {
-    <h1 class="centered info" animate.enter="transition-in" animate.leave="transition-out">{{displayResolution}}</h1>
+@if(displayHint(); as hint) {
+    <h1 class="centered info" animate.enter="transition-in" animate.leave="transition-out">{{hint}}</h1>
 }
 <div class="resolution up" (click)="resolution('up')"></div>
 <div class="resolution down" (click)="resolution('down')"></div>

@@ -27,7 +27,8 @@ export class Livecam {
   private readonly destroyRef = inject(DestroyRef);
   private readonly tracking = inject(Tracking);
   debugCamera = signal('');
-  displayResolution = signal('');
+  displayHint = signal('');
+  private hintTimer?: number;
   private readonly viewFrenzyStop = signal(false);
 
  
@@ -111,7 +112,6 @@ export class Livecam {
     if (methodToBeInvoked) methodToBeInvoked.call(elem);
   }
 
-  private timer?: number;
   async resolution(option: 'up' | 'down') {
     if (this.currentResolution === 4 && option === 'up') return
     if (this.currentResolution === 1 && option === 'down') return
@@ -121,9 +121,9 @@ export class Livecam {
     if (option === 'down') this.currentResolution--;
     await track.applyConstraints({...this.resolutions[this.currentResolution],...this.constraints});
     let resolutionNames = {1: '480p', 2: '720p', 3: '1080p', 4:'4K'};
-    this.displayResolution.set(resolutionNames[this.currentResolution]);
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.displayResolution.set(''), 2000);
+    this.displayHint.set(resolutionNames[this.currentResolution]);
+    clearTimeout(this.hintTimer);
+    this.hintTimer = setTimeout(() => this.displayHint.set(''), 2000);
 
     // this.debugCamera.set(JSON.stringify({
     //   settings: track.getSettings(),
@@ -152,10 +152,15 @@ export class Livecam {
   }
 
   private likeFrenzyArray = [0,0.08,0.16,0.32,0.64];
+  private likeFrenzyRepresentations = ['🫢','🫣','☺️','😄','🤣']
 
   likeFrenzy() {
     this.likeFrenzyArray.push(this.likeFrenzyArray.shift()!);
-    this.tracking.track('like_frenzy', {'frenzy_outcome': this.likeFrenzyArray[0]})
+    this.likeFrenzyRepresentations.push(this.likeFrenzyRepresentations.shift()!);
+    this.tracking.track('like_frenzy', {'frenzy_outcome': this.likeFrenzyArray[0]});
+    this.displayHint.set(this.likeFrenzyRepresentations[0]);
+    clearTimeout(this.hintTimer);
+    this.hintTimer = setTimeout(() => this.displayHint.set(''), 2000);
   }
 
 }
