@@ -6,7 +6,7 @@
     </div>
     <div class="top-right">
         <div class="live bubble">{{'buttons.live' | translate}}</div>
-        <div class="viewers bubble"><mat-icon>visibility</mat-icon>{{compactNumber.format(viewCount())}}</div>
+        <div class="viewers bubble"><mat-icon>visibility</mat-icon>{{formattedViewCount()}}</div>
         <button matIconButton type="button" class="exit-button" (click)="encerrar()"><mat-icon>close</mat-icon></button>
     </div>
     <div class="likes-container">
