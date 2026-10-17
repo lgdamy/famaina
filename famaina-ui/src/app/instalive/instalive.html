@@ -11,8 +11,8 @@
     </div>
     <div class="likes-container">
         @for (like of likes(); track like.id) {
-          <span class="floating-like" [style.left.%]="like.left" [style.font-size.px]="like.size" [style.--duration]="like.duration + 's'" [style.--drift]="like.drift + 'px'">
-            {{ like.emoji }}
+          <span class="floating-like" [style.width.px]="like.size" [style.height.px]="like.size" [style.--duration]="like.duration + 's'" [style.--drift]="like.drift + 'px'" [style.--rotation]="(like.drift) + 'deg'">
+            <img src="images/heart.svg" alt=""/>
           </span>
         }
       </div>

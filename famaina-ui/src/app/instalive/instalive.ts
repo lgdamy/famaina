@@ -10,8 +10,6 @@ import { Tracking } from '../tracking';
 
 interface EmojiLike {
   id: number;
-  emoji: string;
-  left: number;
   size: number;
   duration: number;
   drift: number;
@@ -19,7 +17,6 @@ interface EmojiLike {
 
 @Component({
   imports: [MatButtonModule, MatIconModule, TranslatePipe, RouterModule, Livecam],
-  selector: 'app-instalive',
   styleUrl: './instalive.scss',
   templateUrl: './instalive.html',
 })
@@ -60,12 +57,9 @@ export class Instalive {
   }
 
   dispatchLike() {
-    const emojis = ['❤️','😍','🥰','😂','🔥','👏','💖','💔','💕','👍','🙏','🤭','😱','😎','💩'];
     const id = ++this.nextLikeId;
     const like: EmojiLike = {
       id,
-      emoji: emojis[Math.floor(Math.random() * emojis.length)],
-      left: 5 + Math.random() * 85,
       size: 20 + Math.random() * 20,
       duration: 2.5 + Math.random() * 2,
       drift: -40 + Math.random() * 80

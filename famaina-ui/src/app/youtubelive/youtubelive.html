@@ -1,0 +1,19 @@
+<div class="youtube-container">
+  <app-livecam (viewCount)="updateViewCount($event)" (like)="dispatchLike()"></app-livecam>
+    <div class="top-left">
+        <div class="profile-pic"></div>
+        <div class="bubble">{{username}}</div>
+    </div>
+    <div class="top-right">
+        <div class="live bubble">{{'buttons.live' | translate}}</div>
+        <div class="viewers bubble"><mat-icon>visibility</mat-icon>{{formattedViewCount()}}</div>
+        <button matIconButton type="button" class="exit-button" (click)="encerrar()"><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="likes-container">
+        @for (like of likes(); track like.id) {
+          <span class="floating-like" [style.left.%]="like.left" [style.font-size.px]="like.size" [style.--duration]="like.duration + 's'" [style.--drift]="like.drift + 'px'">
+            {{ like.emoji }}
+          </span>
+        }
+      </div>
+</div>
